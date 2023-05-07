@@ -95,7 +95,7 @@ const menuClick = (event, item) => {
         @menu-click="menuClick"
         @aside-lg-close-click="isAsideLgActive = false"
       />
-      <slot />
+       <slot /> 
       <FooterBar>
         Get more with
         <a

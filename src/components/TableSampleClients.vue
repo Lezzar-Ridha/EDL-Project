@@ -103,11 +103,13 @@ const checked = (isChecked, client) => {
       <tr>
         <th v-if="checkable" />
         <th />
-        <th>Name</th>
-        <th>Company</th>
-        <th>City</th>
-        <th>Progress</th>
-        <th>Created</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>الاسم</th>
+        <th>اللقب</th>
+        <th>Wilaya</th>
+        <th>Matricul</th>
+        <th>Speciality</th>
         <th />
       </tr>
     </thead>
@@ -125,6 +127,12 @@ const checked = (isChecked, client) => {
         </td>
         <td data-label="Name">
           {{ client.name }}
+        </td>
+        <td data-label="Company">
+          {{ client.company }}
+        </td>
+        <td data-label="Company">
+          {{ client.company }}
         </td>
         <td data-label="Company">
           {{ client.company }}
@@ -156,12 +164,7 @@ const checked = (isChecked, client) => {
               small
               @click="isModalActive = true"
             />
-            <BaseButton
-              color="danger"
-              :icon="mdiTrashCan"
-              small
-              @click="isModalDangerActive = true"
-            />
+            
           </BaseButtons>
         </td>
       </tr>

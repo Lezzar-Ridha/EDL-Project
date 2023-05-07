@@ -77,6 +77,14 @@ const routes = [
     name: "error",
     component: () => import("@/views/ErrorView.vue"),
   },
+  {
+    meta: {
+      title: "Condidates List",
+    },
+    path: "/condidateslist",
+    name: "condidateslist",
+    component: () => import("@/views/CondidatesList.vue"),
+  },
 ];
 
 const router = createRouter({
