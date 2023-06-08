@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, reactive, ref } from "vue";
 import {
   mdiMonitorCellphone,
   mdiTableBorder,
@@ -9,7 +9,7 @@ import {
 } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import NotificationBar from "@/components/NotificationBar.vue";
-import TableSampleClients from "@/components/TableSampleClients.vue";
+import AdminCondidatesVdTable from "@/components/Tables/AdminCondidatesVdTable.vue";
 import CardBox from "@/components/CardBox.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import FormCheckRadioGroup from "@/components/FormCheckRadioGroup.vue";
@@ -20,13 +20,41 @@ import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.
 import BaseButton from "@/components/BaseButton.vue";
 import CardBoxComponentEmpty from "@/components/CardBoxComponentEmpty.vue";
 import CardBoxModal from "@/components/CardBoxModal.vue";
+import axios from "axios";
 
 const isModalActive = ref(false);
+const form = reactive({
+  csv : ''
+})
+const submit = () =>{
+  axios.post('https://localhost:8000/participants', form,
+  {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  })
+  .then(res => {
+    console.log(res);
+  })
+  
+
+}
 </script>
 
 <template>
     <CardBoxModal v-model="isModalActive" title="Add Condidant">
-        <FormFilePicker  label="Upload" />
+
+      
+        <FormField class="my-4 mb-4">
+          <FormFilePicker v-model="form.csv"  label="Upload CSV File" qccept=".csv" />
+        </FormField>
+
+        <BaseButtons class="mt-4 mb-2">
+          <BaseButton type="submit"  @click="submit" color="success" label="Submit" class="mr-2" />
+          <BaseButton type="cancel" @click="isModalActive = false"  small color="danger"  label="Cancel" />
+        </BaseButtons>
+
+      
       </CardBoxModal>
   <LayoutAuthenticated>
     <SectionMain>
@@ -45,7 +73,7 @@ const isModalActive = ref(false);
      
 
       <CardBox class="mb-6" has-table>
-        <TableSampleClients checkable />
+        <AdminCondidatesVdTable checkable />
       </CardBox>
 
       
