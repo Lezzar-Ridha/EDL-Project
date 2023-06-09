@@ -102,7 +102,7 @@ const transactionBarItems = computed(() => mainStore.history);
             :account="transaction.account"
           />
         </div>
-        <div class="flex flex-col justify-between">
+        <!-- <div class="flex flex-col justify-between">
           <CardBoxClient
             v-for="client in clientBarItems"
             :key="client.id"
@@ -111,7 +111,7 @@ const transactionBarItems = computed(() => mainStore.history);
             :date="client.created"
             :progress="client.progress"
           />
-        </div>
+        </div> -->
       </div>
 
       <SectionBannerStarOnGitHub class="mt-6 mb-6" />

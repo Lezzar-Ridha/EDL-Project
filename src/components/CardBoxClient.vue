@@ -70,15 +70,21 @@ const pillText = computed(() => props.text ?? `${props.progress}%`);
       <BaseLevel type="justify-start">
         <UserAvatar class="w-12 h-12 mr-6" :username="name" />
         <div class="text-center md:text-left overflow-hidden">
-          <h4 class="text-xl text-ellipsis">
-            {{ name }}
+          <h4 v-if="name == '646d5ee20a500cdd217caeb0'" class="text-xl text-ellipsis">
+            badr
           </h4>
+          <!-- <h4 v-if="name == '646d5ee20a500cdd217caeb0'" class="text-xl text-ellipsis">
+            badr
+          </h4>
+          <h4 v-if="name == '646d5ee20a500cdd217caeb0'" class="text-xl text-ellipsis">
+            badr
+          </h4> -->
+
           <p class="text-gray-500 dark:text-slate-400">
-            {{ date }} @ {{ login }}
+            {{ date }}
           </p>
         </div>
       </BaseLevel>
-      <PillTag :color="pillType" :label="pillText" :icon="pillIcon" />
     </BaseLevel>
   </CardBox>
 </template>

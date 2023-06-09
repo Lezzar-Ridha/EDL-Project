@@ -73,7 +73,7 @@ window.addEventListener("keydown", (e) => {
       </div>
 
       <template #footer>
-        <BaseButtons>
+        <!-- <BaseButtons>
           <BaseButton :label="buttonLabel" :color="button" @click="confirm" />
           <BaseButton
             v-if="hasCancel"
@@ -82,7 +82,7 @@ window.addEventListener("keydown", (e) => {
             outline
             @click="cancel"
           />
-        </BaseButtons>
+        </BaseButtons> -->
       </template>
     </CardBox>
   </OverlayLayer>

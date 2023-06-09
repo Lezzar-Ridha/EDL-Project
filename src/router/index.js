@@ -7,7 +7,7 @@ const routes = [
     meta: {
       title: "Select style",
     },
-    path: "/",
+    path: "/style",
     name: "style",
     component: Style,
   },
@@ -17,7 +17,7 @@ const routes = [
     meta: {
       title: "Dashboard",
     },
-    path: "/dashboard",
+    path: "/",
     name: "dashboard",
     component: Home,
   },
@@ -84,6 +84,70 @@ const routes = [
     path: "/condidateslist",
     name: "condidateslist",
     component: () => import("@/views/CondidatesList.vue"),
+  },
+  {
+    meta: {
+      title: "Users List",
+    },
+    path: "/userslist",
+    name: "UsersList",
+    component: () => import("@/views/UsersList.vue"),
+  },
+  {
+    meta: {
+      title: "News",
+    },
+    path: "/news",
+    name: "News",
+    component: () => import("@/views/News.vue"),
+  },
+  {
+    meta: {
+      title: "ShareNews",
+    },
+    path: "/sharenews",
+    name: "ShareNews",
+    component: () => import("@/views/ShareNews.vue"),
+  },
+  {
+    meta: {
+      title: "Message",
+    },
+    path: "/message",
+    name: "Message",
+    component: () => import("@/views/Message.vue"),
+  },
+  {
+    meta: {
+      title: "TeachersList",
+    },
+    path: "/teacherslist",
+    name: "TeachersList",
+    component: () => import("@/views/TeachersList.vue"),
+  },
+  {
+    meta: {
+      title: "ReceiveMessage",
+    },
+    path: "/receivemessage",
+    name: "ReceiveMessage",
+    component: () => import("@/views/ReceiveMessage.vue"),
+  },
+  {
+    meta: {
+      title: "Create Code",
+    },
+    path: "/createCode",
+    name: "CreateCode",
+    component: () => import("@/views/CreateCode.vue"),
+  },
+  {
+    meta: {
+      title: "TCondidatesList",
+    },
+    path: "/tcondidateslist",
+    name: "TCondidatesList",
+    component: () => import("@/views/TCondidatesList.vue"),
   },
 ];
 
