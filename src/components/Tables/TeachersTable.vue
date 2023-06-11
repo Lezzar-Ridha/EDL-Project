@@ -12,12 +12,30 @@ import axios from "axios";
 
 const teacherslist = reactive([]) 
 
-// onBeforeMount(() => {
-//     axios.get('http://127.0.0.1:8080/')
-//     .then(res => {
-//         teacherslist.value = res.data
-//     })
-// })
+const teachers = reactive([])
+const teachersModules = reactive([])
+
+onBeforeMount(() => {
+    axios.get('https://127.0.0.1:8000/users/type/teacher')
+    .then(async (res) => {
+      teachers.value = res.data
+      for (let teacher of teachers.value) {
+        await getModulesByTeacherId(teacher._id, teacher);
+      }
+    })
+})
+
+function getModulesByTeacherId(id, teacher) {
+  axios.get('https://127.0.0.1:8000/users/teacher/' + id + '/modules')
+  .then(async (res) => {
+    teachersModules.value = res.data
+    const teacherAndModuleObject = Object.assign(teacher, teachersModules.value);
+    // teachersModules.value = [...teacherAndModuleObject];
+    teachersModules.push(teacherAndModuleObject);
+    console.log(teachersModules);
+  })
+}
+
 defineProps({
   checkable: Boolean,
 });
@@ -114,35 +132,37 @@ function checked(teacher){
     <thead>
       <tr>
         <th v-if="checkable" />
-        <th />
+        
         <th>ID</th>
         <th>First Name</th>
         <th>Last Name</th>
+        <th>Email</th>
         <th>Module</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="client in itemsPaginated" :key="client.id">
-        <td class="border-b-0 lg:w-6 before:hidden">
-          <UserAvatar
-            :username="client.name"
-            class="w-24 h-24 mx-auto lg:w-6 lg:h-6"
-          />
+      <tr v-for="client in teachersModules" :key="client.id">
+        
+        <td data-label="Name">
+          {{ client._id }}
         </td>
         <td data-label="Name">
-          {{ client.name }}
+          {{ client.firstName }}
         </td>
         <td data-label="Company">
-          {{ client.company }}
+          {{ client.lastName }}
         </td>
         <td data-label="Company">
-            <div v-if="!client.modules" class="flex">
+          {{ client.email }}
+        </td>
+        <td data-label="Company">
+            <div v-if="!client" class="flex">
                 No modules
             </div>
             <div v-else class='flex'>
-                <div v-for="module in client.modules" :key="module" class="flex mx-2"
-              
-                ></div>
+                <div v-for="module of client" :key="module" class="flex mx-2">
+                {{ module.name }}
+              </div>
             </div>
           </td>
 
@@ -165,4 +185,12 @@ function checked(teacher){
       <small>Page {{ currentPageHuman }} of {{ numPages }}</small>
     </BaseLevel>
   </div>
+  <!-- <div>
+    {{ 
+      teachersModules[0][0].name
+      for (let t of teachersModules[0]) {
+        t.name
+      }
+     }}
+  </div> -->
 </template>

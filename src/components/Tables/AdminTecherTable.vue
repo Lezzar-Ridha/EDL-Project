@@ -22,14 +22,7 @@ onBeforeMount(() => {
 })
 
 
-// const teacherslist = reactive([]) 
 
-// onBeforeMount(() => {
-//     axios.get('http://127.0.0.1:8080/')
-//     .then(res => {
-//         teacherslist.value = res.data
-//     })
-// })
 defineProps({
   checkable: Boolean,
 });

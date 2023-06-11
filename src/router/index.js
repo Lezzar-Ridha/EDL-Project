@@ -127,6 +127,30 @@ const routes = [
   },
   {
     meta: {
+      title: "ReceiveClaim",
+    },
+    path: "/receiveclaim",
+    name: "ReceiveClaim",
+    component: () => import("@/views/ReceiveClaim.vue"),
+  },
+  {
+    meta: {
+      title: "Note",
+    },
+    path: "/note",
+    name: "Note",
+    component: () => import("@/views/Note.vue"),
+  },
+  {
+    meta: {
+      title: "Claim",
+    },
+    path: "/claim",
+    name: "Claim",
+    component: () => import("@/views/Claim.vue"),
+  },
+  {
+    meta: {
       title: "ReceiveMessage",
     },
     path: "/receivemessage",

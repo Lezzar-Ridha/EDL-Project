@@ -48,8 +48,8 @@ const computedValue = computed({
       v-model="computedValue"
       :type="type"
       :name="name"
-      :input-value="key"
-      :label="value"
+      :input-value="value._id"
+      :label="value.name"
       :class="componentClass"
       class="mr-6 mb-3 last:mr-0"
     />

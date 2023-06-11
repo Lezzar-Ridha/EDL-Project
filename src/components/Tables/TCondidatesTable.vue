@@ -20,13 +20,12 @@ defineProps({
 const condidates = reactive([])
 
 onBeforeMount(() => {
-    axios.get('https://127.0.0.1:8000/participants').then(res => {
-      condidates.value = res.data
-      console.log(condidates.value)
-    })
-
+  axios.get('https://127.0.0.1:8000/participants').then(res => {
+    condidates.value = res.data
+    console.log(condidates.value)
+  })
+  
 })
-
 
 const mainStore = useMainStore();
 
@@ -116,44 +115,21 @@ const checked = (isChecked, client) => {
   <table>
     <thead>
       <tr>
-        <th v-if="checkable" />
-        <th />
-        <th>ID</th>
+        <th>Code</th>
         <th>Notes</th>
 
-        <th />
       </tr>
     </thead>
     <tbody>
       <tr v-for="client in condidates.value" :key="client.id">
-        <!-- <TableCheckboxCell
-          v-if="checkable"
-          @checked="checked($event, client)"
-        /> -->
-        <td class="border-b-0 lg:w-6 before:hidden">
-          <!-- <UserAvatar
-            :username="client.name"
-            class="w-24 h-24 mx-auto lg:w-6 lg:h-6"
-          /> -->
-        </td>
+        
         <td data-label="Name">
-          {{ client._id }}
+          {{ client.code }}
         </td>
         <td data-label="Company">
-          {{ client.company }}
+          {{ client.note }}
         </td>
 
-        <td class="before:hidden lg:w-1 whitespace-nowrap">
-          <BaseButtons type="justify-start lg:justify-end" no-wrap>
-            <BaseButton
-              color="info"
-              :icon="mdiEye"
-              small
-              @click="isModalActive = true"
-            />
-            
-          </BaseButtons>
-        </td>
       </tr>
     </tbody>
   </table>

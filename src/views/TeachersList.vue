@@ -1,5 +1,5 @@
 <script setup>
-import { computed, reactive, ref } from "vue";
+import { computed, onBeforeMount, reactive, ref } from "vue";
 import {
   mdiMonitorCellphone,
   mdiTableBorder,
@@ -21,6 +21,7 @@ import BaseButton from "@/components/BaseButton.vue";
 import BaseButtons from "@/components/BaseButtons.vue";
 import CardBoxComponentEmpty from "@/components/CardBoxComponentEmpty.vue";
 import CardBoxModal from "@/components/CardBoxModal.vue";
+import axios from "axios";
 
 const isModalActive = ref(false);
 
@@ -31,6 +32,38 @@ const customElementsForm = reactive({
   file: null,
 });
 
+const modules = reactive([])
+
+const form = reactive({
+  teacherId : '',
+  modules : []
+})
+
+onBeforeMount(() => {
+    axios.get('https://127.0.0.1:8000/modules')
+    .then(res => {
+      modules.value = res.data
+      console.log(modules.value)
+    })
+})
+
+const teacherModules = reactive([])
+
+
+
+const submit = () => {
+  console.log(form)
+  for(let i=0 ; i < form.modules.length;i++){
+
+    axios.put('https://127.0.0.1:8000/modules/' + form.modules[i] + '/teachers', {
+      teacherId : form.teacherId
+    })
+
+    }
+      window.location.reload()}
+
+
+
 </script>
 
 <template>
@@ -38,19 +71,20 @@ const customElementsForm = reactive({
       <CardBoxModal v-model="isModalActive" title="Assign Module">
       <FormField label="ID">
               <FormControl  :icon="mdiAccount"
+              v-model="form.teacherId"
                 placeholder="Teacher Id" />
       </FormField>
       
       <FormField label="Modules">
         <FormCheckRadioGroup
-          v-model="customElementsForm.checkbox"
+          v-model="form.modules"
           name="sample-checkbox"
-          :options="{ lorem: 'SVS', ipsum: 'EDL', dolore: 'ASD' }"
+          :options="modules.value"
         />
       </FormField>
   
         <BaseButtons class="mt-4">
-          <BaseButton type="submit"  color="success" label="Submit" />
+          <BaseButton type="submit" @click="submit"  color="success" label="Submit" />
         </BaseButtons>
         </CardBoxModal>
     <SectionMain>

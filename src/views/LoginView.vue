@@ -10,18 +10,44 @@ import FormControl from "@/components/FormControl.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import BaseButtons from "@/components/BaseButtons.vue";
 import LayoutGuest from "@/layouts/LayoutGuest.vue";
+import axios from "axios";
 
 const form = reactive({
-  login: "john.doe",
-  pass: "highly-secure-password-fYjUw-",
-  remember: true,
+  email: "example@gmail.com",
+  password: "John",
 });
 
 const router = useRouter();
 
 const submit = () => {
-  router.push("/dashboard");
+  axios.post('https://localhost:8000/auth/login', {
+    email: form.email,
+    password: form.password
+  }).then(res => {
+    localStorage.setItem("type", res.data.type);
+    localStorage.setItem("id", res.data._id);
+    switch(res.data.type) {
+      case "participant":
+        router.push("/news");
+        break;
+      case "teacher":
+        router.push("/tcondidateslist")
+        break;
+      case "cfd":
+        router.push("/teacherslist")
+        break;
+      case "viceDean":
+        router.push("/createCode");
+        break;
+    }
+    // router.push("/dashboard");
+  }).catch(err => {
+
+    console.log(err);
+  }) 
 };
+
+
 </script>
 
 <template>
@@ -30,7 +56,7 @@ const submit = () => {
       <CardBox :class="cardClass" is-form @submit.prevent="submit">
         <FormField label="Login" help="Please enter your login">
           <FormControl
-            v-model="form.login"
+            v-model="form.email"
             :icon="mdiAccount"
             name="login"
             autocomplete="username"
@@ -39,7 +65,7 @@ const submit = () => {
 
         <FormField label="Password" help="Please enter your password">
           <FormControl
-            v-model="form.pass"
+            v-model="form.password"
             :icon="mdiAsterisk"
             type="password"
             name="password"
@@ -56,7 +82,7 @@ const submit = () => {
 
         <template #footer>
           <BaseButtons>
-            <BaseButton type="submit" color="info" label="Login" />
+            <BaseButton type="submit" @click="submit" color="info" label="Login" />
             <BaseButton to="/dashboard" color="info" outline label="Back" />
           </BaseButtons>
         </template>

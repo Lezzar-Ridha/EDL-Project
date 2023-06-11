@@ -51,7 +51,7 @@ const menuClick = (event) => {
       :is="item.to ? RouterLink : 'a'"
       v-slot="vSlot"
       :to="item.to ?? null"
-      v-if="item.role == 'STUDENT'"
+      v-if="item.role == 'TEACHER'"
       :href="item.href ?? null"
       :target="item.target ?? null"
       class="flex cursor-pointer"

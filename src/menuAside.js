@@ -69,10 +69,28 @@ export default [
   },
   {
     to: "/tcondidateslist",
-    label: "TCondidatesList",
+    label: "CondidatesList",
     icon: mdiTable,
     role: 'TEACHER'
   },
+  {
+    to: "/receiveclaim",
+    label: "ReceiveClaim",
+    icon: mdiTable,
+    role: 'CFD'
+  },
+  {
+    to: "/claim",
+    label: "Claim",
+    icon: mdiTable,
+    role: 'STUDENT'
+  },
+  // {
+  //   to: "/note",
+  //   label: "Note",
+  //   icon: mdiTable,
+  //   role: 'TEACHER'
+  // },
   // {
   //   to: "/news",
   //   label: "News",
