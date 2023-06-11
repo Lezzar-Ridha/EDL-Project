@@ -63,12 +63,15 @@ onBeforeMount(() => {
 })
 
 const submit = () => {
+  const teacherId = localStorage.getItem("id");
   console.log(form.module._id);
-  // axios.post(`https://127.0.0.1:8000/users/${}/notes`, {
-  //       participantCode: form.code,
-  //       moduleId: form.module._id,
-  //       note: form.note
-  // })
+  console.log(form.code);
+  console.log(form.note);
+  axios.post(`https://127.0.0.1:8000/users/${teacherId}/notes`, {
+        participantCode: form.code,
+        moduleId: form.module._id,
+        note: form.note
+  })
 }
 
 </script>

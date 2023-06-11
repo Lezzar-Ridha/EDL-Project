@@ -183,4 +183,18 @@ const router = createRouter({
   },
 });
 
+router.beforeEach((to, from, next) => {
+  const isLoggedIn = sessionStorage.getItem("isAuth");
+  if (to.name === "login") {
+    next();
+  }// login route is always  okay (we could use the requires authModule flag below). prevent a redirect loop
+   else if (isLoggedIn === "true") {
+    next(); // i'm logged in. carry on
+  } else if (to.meta && to.meta.requiresAuth === "false") {
+    next(); // requires authModule is explicitly set to false
+  } else {
+    // always put your redirect as the default case
+    next({ name: "login" }); // redirect to login
+  }
+});
 export default router;

@@ -11,6 +11,9 @@ import BaseButton from "@/components/BaseButton.vue";
 import BaseButtons from "@/components/BaseButtons.vue";
 import LayoutGuest from "@/layouts/LayoutGuest.vue";
 import axios from "axios";
+import { useMainStore } from "@/stores/main.js";
+const mainStore = useMainStore
+
 
 const form = reactive({
   email: "example@gmail.com",
@@ -24,8 +27,13 @@ const submit = () => {
     email: form.email,
     password: form.password
   }).then(res => {
-    localStorage.setItem("type", res.data.type);
+    mainStore.type = res.data.type
+    localStorage.setItem("type",mainStore.type);
     localStorage.setItem("id", res.data._id);
+    localStorage.setItem("firstName", res.data.firstName);
+    localStorage.setItem("lastName", res.data.lastName);
+    const isAuth = true
+    sessionStorage.setItem("isAuth" ,isAuth )
     switch(res.data.type) {
       case "participant":
         router.push("/news");
@@ -38,6 +46,9 @@ const submit = () => {
         break;
       case "viceDean":
         router.push("/createCode");
+        break;
+      case "admin":
+        router.push("/condidateslist");
         break;
     }
     // router.push("/dashboard");

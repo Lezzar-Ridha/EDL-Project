@@ -1,11 +1,13 @@
 <script setup>
-import { ref, computed } from "vue";
+import { computed, onBeforeMount, reactive, ref } from "vue";
 import { RouterLink } from "vue-router";
 import { useStyleStore } from "@/stores/style.js";
+import { useMainStore } from "@/stores/main.js";
 import { mdiMinus, mdiPlus } from "@mdi/js";
 import { getButtonColor } from "@/colors.js";
 import BaseIcon from "@/components/BaseIcon.vue";
 import AsideMenuList from "@/components/AsideMenuList.vue";
+
 
 const props = defineProps({
   item: {
@@ -14,6 +16,8 @@ const props = defineProps({
   },
   isDropdownList: Boolean,
 });
+
+const mainStore = useMainStore
 
 const emit = defineEmits(["menu-click"]);
 
@@ -42,7 +46,14 @@ const menuClick = (event) => {
   if (hasDropdown.value) {
     isDropdownActive.value = !isDropdownActive.value;
   }
+
+
+  
 };
+
+const type = ref('')
+
+
 </script>
 
 <template>
@@ -51,7 +62,7 @@ const menuClick = (event) => {
       :is="item.to ? RouterLink : 'a'"
       v-slot="vSlot"
       :to="item.to ?? null"
-      v-if="item.role == 'TEACHER'"
+      v-if="item.role == mainStore.type"
       :href="item.href ?? null"
       :target="item.target ?? null"
       class="flex cursor-pointer"

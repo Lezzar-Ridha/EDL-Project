@@ -1,13 +1,19 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 
+const type = localStorage.getItem('type')
+const firstName = localStorage.getItem('firstName')
+const lastName = localStorage.getItem('lastName')
+
 export const useMainStore = defineStore("main", {
   state: () => ({
     /* User */
     userName: null,
     userEmail: null,
     userAvatar: null,
-
+    type: type,
+    firstName: firstName,
+    lastName: lastName,
     isGenerated: false,
 
     generate : false,

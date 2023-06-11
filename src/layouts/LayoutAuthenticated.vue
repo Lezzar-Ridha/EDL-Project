@@ -13,8 +13,10 @@ import NavBarItemPlain from "@/components/NavBarItemPlain.vue";
 import AsideMenu from "@/components/AsideMenu.vue";
 import FooterBar from "@/components/FooterBar.vue";
 
+const mainStore = useMainStore()
+
 useMainStore().setUser({
-  name: "John Doe",
+  name: mainStore.firstName + " " + mainStore.lastName,
   email: "john@example.com",
   avatar:
     "https://avatars.dicebear.com/api/avataaars/example.svg?options[top][]=shortHair&options[accessoriesChance]=93",
